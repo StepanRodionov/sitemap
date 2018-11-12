@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation\XmlRoot;
  *
  * @XmlRoot("url")
  */
-class ImageUrl
+class ImageUrl extends Url
 {
     const IMAGES_MAX_COUNT = 1000;
 
