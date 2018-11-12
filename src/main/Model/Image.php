@@ -28,6 +28,11 @@ class Image
      */
     protected $loc = '';
 
+    public function __construct($loc = '')
+    {
+        $this->withLoc($loc);
+    }
+
     /**
      * @return string
      */
