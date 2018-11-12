@@ -4,6 +4,7 @@
 namespace WebArch\Sitemap\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\XmlElement;
@@ -25,6 +26,7 @@ class ImageUrl
      * @XmlElement(cdata=false)
      * @Type("string")
      * @Groups({"sitemap"})
+     * @Accessor(getter="getLoc",setter="withLoc")
      */
     protected $loc = '';
 

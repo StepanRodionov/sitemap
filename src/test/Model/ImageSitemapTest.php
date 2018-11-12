@@ -3,11 +3,16 @@
 namespace WebArch\Sitemap\Test\Model;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\SerializationContext;
 use WebArch\Sitemap\Enum\SerializationContextGroups;
 use WebArch\Sitemap\Exception\UrlCountLimitException;
 use WebArch\Sitemap\Exception\XmlSizeLimitException;
+use WebArch\Sitemap\Model\Image;
 use WebArch\Sitemap\Model\ImageSitemap;
+use WebArch\Sitemap\Model\ImageUrl;
+use WebArch\Sitemap\Model\ImageUrlSet;
+use WebArch\Sitemap\Model\UrlSet;
 use WebArch\Sitemap\Test\TestBase;
 
 class ImageSitemapTest extends TestBase
@@ -32,22 +37,16 @@ class ImageSitemapTest extends TestBase
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>/some/url/location/goes/here</loc>
-    <lastmod>2018-02-28T12:58:36+00:00</lastmod>
-    <changefreq>always</changefreq>
-    <priority>0.0</priority>
+    <loc>/upload/example/1</loc>
   </url>
   <url>
-    <loc>/</loc>
-    <changefreq>never</changefreq>
-    <priority>0.0</priority>
-  </url>
-  <url>
-    <loc>/FOO</loc>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>/bar?sdf=234</loc>
+    <loc>/foo/bar/index.html</loc>
+    <image:image>
+      <image:loc>/upload/example/1</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>/upload/example/2</image:loc>
+    </image:image>
   </url>
 </urlset>
 
@@ -77,5 +76,23 @@ END;
                 SerializationContext::create()->setGroups([SerializationContextGroups::SITEMAP])
             )
         );
+    }
+
+    public function getUrlSet(): UrlSet
+    {
+        //  TODO - придумать больше тестов
+
+        $urlSet = new ImageUrlSet();
+
+        $images = new ArrayCollection();
+        $images->add((new Image())->withLoc('/upload/example/1'));
+        $images->add((new Image())->withLoc('/upload/example/2'));
+
+        //  Начало заполнения UrlSet
+        $urlSet->add((new ImageUrl())->withLoc('/upload/example/1'));
+        $urlSet->add((new ImageUrl())->withLoc('/foo/bar/index.html')
+                                     ->withImages($images));
+
+        return $urlSet;
     }
 }

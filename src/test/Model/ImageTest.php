@@ -7,7 +7,7 @@ use WebArch\Sitemap\Enum\SerializationContextGroups;
 use WebArch\Sitemap\Model\Image;
 use WebArch\Sitemap\Test\TestBase;
 
-class ImageElementTest extends TestBase
+class ImageTest extends TestBase
 {
     protected function setUp()
     {

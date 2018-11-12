@@ -3,6 +3,9 @@
 
 namespace WebArch\Sitemap\Model;
 
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\XmlList;
 use JMS\Serializer\Annotation\XmlNamespace;
 use JMS\Serializer\Annotation\XmlRoot;
 
@@ -16,5 +19,11 @@ use JMS\Serializer\Annotation\XmlRoot;
  */
 class ImageSitemap extends Sitemap
 {
-
+    /**
+     * @var UrlSet
+     * @Type("WebArch\Sitemap\Model\ImageUrlSet")
+     * @XmlList(inline=true, entry="urlset")
+     * @Groups({"sitemap"})
+     */
+    protected $urlSet;
 }
