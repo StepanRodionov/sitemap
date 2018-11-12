@@ -26,4 +26,15 @@ class ImageSitemap extends Sitemap
      * @Groups({"sitemap"})
      */
     protected $urlSet;
+
+    /**
+     * ImageSitemap constructor.
+     *
+     * @param string $filename
+     */
+    public function __construct(string $filename)
+    {
+        parent::__construct($filename);
+        $this->withUrlSet(new ImageUrlSet());
+    }
 }
