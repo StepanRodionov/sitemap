@@ -3,16 +3,14 @@
 
 namespace WebArch\Sitemap\Model;
 
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
-use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Accessor;
-use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\XmlElement;
 use JMS\Serializer\Annotation\XmlList;
 use JMS\Serializer\Annotation\XmlRoot;
+use WebArch\Sitemap\Model\Abstraction\BaseUrl;
 
 /**
  * Class ImageUrl
@@ -20,7 +18,7 @@ use JMS\Serializer\Annotation\XmlRoot;
  *
  * @XmlRoot("url")
  */
-class ImageUrl extends Url
+class ImageUrl extends BaseUrl
 {
     const IMAGES_MAX_COUNT = 1000;
 
@@ -40,20 +38,6 @@ class ImageUrl extends Url
      */
     protected $images;
 
-    /**
-     * @Serializer\SkipWhenEmpty()
-     */
-    protected $changefreq;
-
-    /**
-     * @Serializer\SkipWhenEmpty()
-     */
-    protected $lastmod;
-
-    /**
-     * @Serializer\SkipWhenEmpty()
-     */
-    protected $priority;
 
     /**
      * @return string
@@ -94,22 +78,6 @@ class ImageUrl extends Url
 
         return $this;
     }
-
-    public function withLastmod(DateTimeImmutable $lastmod)
-    {
-        return $this;
-    }
-
-    public function withChangefreq(string $changefreq)
-    {
-        return $this;
-    }
-
-    public function withPriority($priority)
-    {
-        return $this;
-    }
-
 
 }
 

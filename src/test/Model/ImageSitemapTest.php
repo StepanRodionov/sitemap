@@ -91,9 +91,6 @@ END;
         //  Начало заполнения UrlSet
         $urlSet->add((new ImageUrl())
             ->withLoc('/upload/example/1')
-            ->withChangefreq('weekly')
-            ->withLastmod(new \DateTimeImmutable())
-            ->withPriority(0.8)
         );
         $urlSet->add((new ImageUrl())->withLoc('/foo/bar/index.html')
                                      ->withImages($images));
