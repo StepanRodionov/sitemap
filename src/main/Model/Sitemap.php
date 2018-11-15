@@ -104,8 +104,12 @@ class Sitemap
     {
         $maxLastMod = $this->getLastmod();
 
-        /** @var Url $url */
+        /** @var BaseUrl $url */
         foreach ($this->getUrlSet() as $url) {
+
+            if(!$url instanceof Url){
+                continue;
+            }
 
             if (!($url->getLastmod() instanceof DateTimeInterface)) {
                 continue;
